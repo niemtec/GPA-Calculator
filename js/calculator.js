@@ -136,15 +136,15 @@ function calculateAverage(level2, placement, level3) {
         level3gpa = level3 / 6;
         level2gpa = (level2 + placement) / 9;
         final = (level3gpa + level2gpa) / 2;
-        console.log("Level 2 GPA: " + level2gpa);
-        console.log("Level 3 GPA: " + level3gpa);
+        // console.log("Level 2 GPA: " + level2gpa);
+        // console.log("Level 3 GPA: " + level3gpa);
         return final;
     } else {
         level3gpa = level3 / 6;
         level2gpa = level2 / 6;
         final = (level3gpa + level2gpa) / 2;
-        console.log("Level 2 GPA: " + level2gpa);
-        console.log("Level 3 GPA: " + level3gpa);
+        // console.log("Level 2 GPA: " + level2gpa);
+        // console.log("Level 3 GPA: " + level3gpa);
         return final;
     }
 }
@@ -154,18 +154,18 @@ function calculateGPA() {
     var placement = getPlacementValue();
     var level3 = getLevel3Values();
 
-    console.log("Level 2 Total: " + level2);
-    console.log("Placement Total: " + placement);
-    console.log("-----------------------------");
-    console.log("Level 2 + Placement: " + (level2 + placement));
-    console.log("-----------------------------");
-    console.log("Level 3 Total: " + level3);
+    // console.log("Level 2 Total: " + level2);
+    // console.log("Placement Total: " + placement);
+    // console.log("-----------------------------");
+    // console.log("Level 2 + Placement: " + (level2 + placement));
+    // console.log("-----------------------------");
+    // console.log("Level 3 Total: " + level3);
 
     // GPA Rounded UP
     var average = Math.ceil(calculateAverage(level2, placement, level3));
 
-    console.log("Average GPA: " + average);
-    console.log(convertPointsToGrade(average));
+    // console.log("Average GPA: " + average);
+    // console.log(convertPointsToGrade(average));
 
     var grade = convertPointsToGrade(average).toString();
     var degree = convertPointsToDegree(average).toString();
