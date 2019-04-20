@@ -22,6 +22,7 @@ function convertGradeToPoints(grade) {
     return conversionTable[grade];
 }
 
+
 const level2Credits = {
     "Group-Project": 40,
     "Software-Development": 20,
@@ -42,8 +43,6 @@ const level3Credits = {
 
 // Get values from drop down for level 2
 function getLevel2Values() {
-    let numberOfModules = 0;
-
     var groupProjectSelector = document.getElementById('Group-Project');
     var groupProjectValue = groupProjectSelector[groupProjectSelector.selectedIndex].value;
     var groupProject = convertGradeToPoints(groupProjectValue) * 2;
@@ -64,6 +63,10 @@ function getLevel2Values() {
     var optional2Value = optional2Selector[optional2Selector.selectedIndex].value;
     var optional2 = convertGradeToPoints(optional2Value);
 
+    return groupProject + softwareDevelopment + usabilityEngineering + optional1 + optional2;
+}
+
+function getPlacementValue() {
     var placementSelector = document.getElementById('Placement');
     var placementValue = placementSelector[placementSelector.selectedIndex].value;
     var placement = 0;
@@ -73,9 +76,56 @@ function getLevel2Values() {
         numberOfModules = 5;
     } else {
         placement = convertGradeToPoints(placementValue);
+        placement = placement * 3;
         numberOfModules = 6;
     }
 
-    var gpa = groupProject + softwareDevelopment + usabilityEngineering + optional1 + optional2 + placement;
-    return gpa / numberOfModules;
+    return placement;
 }
+
+// Get values from drop down for level 3
+function getLevel3Values() {
+    var fypSelector = document.getElementById('Final-Year-Project');
+    var fypValue = fypSelector[fypSelector.selectedIndex].value;
+    var fyp = convertGradeToPoints(fypValue);
+
+    var advancedSelector = document.getElementById('Advanced-Topics');
+    var advancedValue = advancedSelector[advancedSelector.selectedIndex].value;
+    var advanced = convertGradeToPoints(advancedValue);
+
+    var option1Selector = document.getElementById('Option-1');
+    var option1Value = option1Selector[option1Selector.selectedIndex].value;
+    var option1 = convertGradeToPoints(option1Value);
+
+    var option2Selector = document.getElementById('Option-2');
+    var option2Value = option2Selector[option2Selector.selectedIndex].value;
+    var option2 = convertGradeToPoints(option2Value);
+
+    var option3Selector = document.getElementById('Option-3');
+    var option3Value = option3Selector[option3Selector.selectedIndex].value;
+    var option3 = convertGradeToPoints(option3Value);
+
+    return fyp + advanced + option1 + option2 + option3;
+}
+
+
+function calculateAverage(level2, placement, level3) {
+    if (placement !== 0) {
+        return ((2 * level3) + (placement + level2)) / 3;
+    } else {
+        return ((2 * level3) + level2) / 2;
+    }
+}
+
+function calculateGPA() {
+    var level2 = getLevel2Values();
+    var placement = getPlacementValue();
+    var level3 = getLevel3Values();
+    var average = calculateAverage(level2, placement, level3);
+
+    var result = convertPointsToGrade(average);
+
+    document.getElementById('Result').innerHTML = result;
+}
+
+
