@@ -22,6 +22,40 @@ function convertGradeToPoints(grade) {
     return conversionTable[grade];
 }
 
+function convertPointsToGrade(points) {
+    const conversionTable = {
+        17: "A*",
+        16: "A+",
+        15: "A",
+        14: "A-",
+        13: "B+",
+        12: "B",
+        11: "B-",
+        10: "C+",
+        9: "C",
+        8: "C-",
+        7: "D+",
+        6: "D",
+        5: "D-",
+        0: "N/A"
+    };
+    return conversionTable[points];
+}
+
+function convertPointsToDegree(points) {
+    if (points >= 14) {
+        return "1st";
+    } else if (points >= 11) {
+        return "2:1";
+    } else if (points >= 8) {
+        return "2:2";
+    } else if (points >= 5) {
+        return "3rd";
+    } else {
+        return "Fail";
+    }
+}
+
 
 const level2Credits = {
     "Group-Project": 40,
@@ -43,55 +77,51 @@ const level3Credits = {
 
 // Get values from drop down for level 2
 function getLevel2Values() {
-    var groupProjectValue = $('#Group-Project').find("option:selected");
+    var groupProjectValue = $('#Group-Project').find("option:selected").text();
     var groupProject = convertGradeToPoints(groupProjectValue) * 2;
 
-    var softwareDevelopmentValue = $('#Software-Development').find("option:selected");
+    var softwareDevelopmentValue = $('#Software-Development').find("option:selected").text();
     var softwareDevelopment = convertGradeToPoints(softwareDevelopmentValue);
 
-    var usabilityEngineeringValue = $('Usability-Engineering').find("option:selected");
+    var usabilityEngineeringValue = $('#Usability-Engineering').find("option:selected").text();
     var usabilityEngineering = convertGradeToPoints(usabilityEngineeringValue);
 
-    var optional1Value = $('#Optional-Module-1').find("option:selected");
+    var optional1Value = $('#Optional-Module-1').find("option:selected").text();
     var optional1 = convertGradeToPoints(optional1Value);
 
-    var optional2Value = $('#Optional-Module-2').find("option:selected");
+    var optional2Value = $('#Optional-Module-2').find("option:selected").text();
     var optional2 = convertGradeToPoints(optional2Value);
 
-    return groupProject + softwareDevelopment + usabilityEngineering + optional1 + optional2;
+    return groupProject + softwareDevelopment + usabilityEngineering + optional2 + optional1;
 }
 
 function getPlacementValue() {
-    var placementValue = $('#Placement').find("option:selected");
+    var placementValue = $('#Placement').find("option:selected").text();
     var placement = 0;
 
     if (placementValue === "N/A") {
-        placement = 0;
-        numberOfModules = 5;
+        return 0;
     } else {
         placement = convertGradeToPoints(placementValue);
-        placement = placement * 3;
-        numberOfModules = 6;
+        return placement * 3;
     }
-
-    return placement;
 }
 
 // Get values from drop down for level 3
 function getLevel3Values() {
-    var fypValue = $('#Final-Year-Project').find("option:selected");
-    var fyp = convertGradeToPoints(fypValue);
+    var fypValue = $('#Final-Year-Project').find("option:selected").text();
+    var fyp = convertGradeToPoints(fypValue) * 2;
 
-    var advancedValue = $('#Advanced-Topics').find("option:selected");
+    var advancedValue = $('#Advanced-Topics').find("option:selected").text();
     var advanced = convertGradeToPoints(advancedValue);
 
-    var option1Value = $('#Option-1').find("option:selected");
+    var option1Value = $('#Option-1').find("option:selected").text();
     var option1 = convertGradeToPoints(option1Value);
 
-    var option2Value = $('#Option-2').find("option:selected");
+    var option2Value = $('#Option-2').find("option:selected").text();
     var option2 = convertGradeToPoints(option2Value);
 
-    var option3Value = $('#Option-3').find("option:selected");
+    var option3Value = $('#Option-3').find("option:selected").text();
     var option3 = convertGradeToPoints(option3Value);
 
     return fyp + advanced + option1 + option2 + option3;
@@ -99,10 +129,23 @@ function getLevel3Values() {
 
 
 function calculateAverage(level2, placement, level3) {
+    var level3gpa = 0;
+    var level2gpa = 0;
+    var final = 0;
     if (placement !== 0) {
-        return ((2 * level3) + (placement + level2)) / 3;
+        level3gpa = level3 / 6;
+        level2gpa = (level2 + placement) / 9;
+        final = (level3gpa + level2gpa) / 2;
+        console.log("Level 2 GPA: " + level2gpa);
+        console.log("Level 3 GPA: " + level3gpa);
+        return final;
     } else {
-        return ((2 * level3) + level2) / 2;
+        level3gpa = level3 / 6;
+        level2gpa = level2 / 6;
+        final = (level3gpa + level2gpa) / 2;
+        console.log("Level 2 GPA: " + level2gpa);
+        console.log("Level 3 GPA: " + level3gpa);
+        return final;
     }
 }
 
@@ -110,11 +153,23 @@ function calculateGPA() {
     var level2 = getLevel2Values();
     var placement = getPlacementValue();
     var level3 = getLevel3Values();
-    var average = calculateAverage(level2, placement, level3);
 
-    var result = convertPointsToGrade(average);
+    console.log("Level 2 Total: " + level2);
+    console.log("Placement Total: " + placement);
+    console.log("-----------------------------");
+    console.log("Level 2 + Placement: " + (level2 + placement));
+    console.log("-----------------------------");
+    console.log("Level 3 Total: " + level3);
 
-    document.getElementById('Result').innerHTML = result;
+    // GPA Rounded UP
+    var average = Math.ceil(calculateAverage(level2, placement, level3));
+
+    console.log("Average GPA: " + average);
+    console.log(convertPointsToGrade(average));
+
+    var grade = convertPointsToGrade(average).toString();
+    var degree = convertPointsToDegree(average).toString();
+    document.getElementById('Result').innerHTML = "GPA: " + average + "  ∙  Grade: " + grade + "  ∙  Degree: " + degree;
 }
 
 
