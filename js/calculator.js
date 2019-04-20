@@ -44,31 +44,31 @@ const level3Credits = {
 // Get values from drop down for level 2
 function getLevel2Values() {
     var groupProjectSelector = document.getElementById('Group-Project');
-    var groupProjectValue = groupProjectSelector[groupProjectSelector.selectedIndex].value;
+    var groupProjectValue = groupProjectSelector.options[groupProjectSelector.selectedIndex].value;
     var groupProject = convertGradeToPoints(groupProjectValue) * 2;
 
     var softwareDevelopmentSelector = document.getElementById('Software-Development');
-    var softwareDevelopmentValue = softwareDevelopmentSelector[softwareDevelopmentSelector.selectedIndex].value;
+    var softwareDevelopmentValue = softwareDevelopmentSelector.options[softwareDevelopmentSelector.selectedIndex].value;
     var softwareDevelopment = convertGradeToPoints(softwareDevelopmentValue);
 
     var usabilityEngineeringSelector = document.getElementById('Usability-Engineering');
-    var usabilityEngineeringValue = usabilityEngineeringSelector[usabilityEngineeringSelector.selectedIndex].value;
+    var usabilityEngineeringValue = usabilityEngineeringSelector.options[usabilityEngineeringSelector.selectedIndex].value;
     var usabilityEngineering = convertGradeToPoints(usabilityEngineeringValue);
 
     var optional1Selector = document.getElementById('Optional-Module-1');
-    var optional1Value = optional1Selector[optional1Selector.selectedIndex].value;
+    var optional1Value = optional1Selector.options[optional1Selector.selectedIndex].value;
     var optional1 = convertGradeToPoints(optional1Value);
 
     var optional2Selector = document.getElementById('Optional-Module-2');
-    var optional2Value = optional2Selector[optional2Selector.selectedIndex].value;
+    var optional2Value = optional2Selector.options[optional2Selector.selectedIndex].value;
     var optional2 = convertGradeToPoints(optional2Value);
 
     return groupProject + softwareDevelopment + usabilityEngineering + optional1 + optional2;
-}
+};
 
 function getPlacementValue() {
     var placementSelector = document.getElementById('Placement');
-    var placementValue = placementSelector[placementSelector.selectedIndex].value;
+    var placementValue = placementSelector.options[placementSelector.selectedIndex].value;
     var placement = 0;
 
     if (placementValue === "N/A") {
@@ -81,41 +81,41 @@ function getPlacementValue() {
     }
 
     return placement;
-}
+};
 
 // Get values from drop down for level 3
 function getLevel3Values() {
     var fypSelector = document.getElementById('Final-Year-Project');
-    var fypValue = fypSelector[fypSelector.selectedIndex].value;
+    var fypValue = fypSelector.options[fypSelector.selectedIndex].value;
     var fyp = convertGradeToPoints(fypValue);
 
     var advancedSelector = document.getElementById('Advanced-Topics');
-    var advancedValue = advancedSelector[advancedSelector.selectedIndex].value;
+    var advancedValue = advancedSelector.options[advancedSelector.selectedIndex].value;
     var advanced = convertGradeToPoints(advancedValue);
 
     var option1Selector = document.getElementById('Option-1');
-    var option1Value = option1Selector[option1Selector.selectedIndex].value;
+    var option1Value = option1Selector.options[option1Selector.selectedIndex].value;
     var option1 = convertGradeToPoints(option1Value);
 
     var option2Selector = document.getElementById('Option-2');
-    var option2Value = option2Selector[option2Selector.selectedIndex].value;
+    var option2Value = option2Selector.options[option2Selector.selectedIndex].value;
     var option2 = convertGradeToPoints(option2Value);
 
     var option3Selector = document.getElementById('Option-3');
-    var option3Value = option3Selector[option3Selector.selectedIndex].value;
+    var option3Value = option3Selector.options[option3Selector.selectedIndex].value;
     var option3 = convertGradeToPoints(option3Value);
 
     return fyp + advanced + option1 + option2 + option3;
-}
+};
 
 
-function calculateAverage(level2, placement, level3) {
+    function calculateAverage(level2, placement, level3) {
     if (placement !== 0) {
         return ((2 * level3) + (placement + level2)) / 3;
     } else {
         return ((2 * level3) + level2) / 2;
     }
-}
+};
 
 function calculateGPA() {
     var level2 = getLevel2Values();
@@ -126,6 +126,6 @@ function calculateGPA() {
     var result = convertPointsToGrade(average);
 
     document.getElementById('Result').innerHTML = result;
-}
+};
 
 
