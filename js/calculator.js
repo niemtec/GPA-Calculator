@@ -169,7 +169,7 @@ function calculateGPA() {
 
     var grade = convertPointsToGrade(average).toString();
     var degree = convertPointsToDegree(average).toString();
-    document.getElementById('Result').innerHTML = "GPA: " + average + "  ∙  Grade: " + grade + "  ∙  Degree: " + degree;
+    document.getElementById('Result').innerHTML = "GPA: " + average + "  ∙  Degree: " + degree;
 }
 
 
