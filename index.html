@@ -10,7 +10,9 @@
 </head>
 <body>
 <div class="container text-center">
+    <div class="row buffer"></div>
     <h1>Brunel GPA Calculator</h1>
+    <div class="row buffer"></div>
 </div>
 <!--Second Year Grades Section-->
 <div class="col-md-8 container-fluid">
@@ -42,7 +44,7 @@
                                 <option value="D+">D+</option>
                                 <option value="D">D</option>
                                 <option value="D-">D-</option>
-                        </select>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="Software-Development">Software Development and Management:</label><select
@@ -272,14 +274,25 @@
                                     Calculate
                                 </button>
                             </div>
-                            <label id="Result" class="form-control">Result</label>
+                            <label id="Result" class="form-control"></label>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row buffer"></div>
 </div>
+
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="row justify-content-center">
+                    <span class="text-muted">Powered by <a class="branding" href="https://niemtec.com">Niemtec</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

@@ -1,3 +1,25 @@
 .buffer{
     margin-top:20px;
 }
+
+.footer {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'Elemental';
+    src: url('fonts/elemental end.eot');
+    src: url('fonts/elemental end.eot?#iefix') format('embedded-opentype'),
+    url('fonts/elemental end.woff') format('woff'),
+    url('fonts/elemental end.ttf') format('truetype'),
+    url('fonts/elemental end.svg#fp-1549') format('svg');
+}
+
+.branding {
+    font-family: 'Elemental', 'Arial', sans-serif;
+    font-size: 1em;
+    text-transform: uppercase;
+    color: #000000 !important;
+}
