@@ -162,7 +162,7 @@ function calculateGPA() {
     // console.log("Level 3 Total: " + level3);
 
     // GPA Rounded UP
-    var average = Math.ceil(calculateAverage(level2, placement, level3));
+    var average = Math.floor(calculateAverage(level2, placement, level3));
 
     // console.log("Average GPA: " + average);
     // console.log(convertPointsToGrade(average));
